@@ -117,7 +117,7 @@ class LoginPageState extends State<LoginPage> {
                           return AlertDialog(
                             title: Text("Alert"),
                             content:
-                                 Text("Incorrect User Id or Password"),
+                                 Text("Invalid user or password"),
                             actions: <Widget>[
                               FlatButton(
                                 child: Text("OK"),
