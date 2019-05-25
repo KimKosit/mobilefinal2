@@ -115,7 +115,6 @@ class LoginPageState extends State<LoginPage> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("Alert"),
                             content:
                                  Text("Invalid user or password"),
                             actions: <Widget>[
