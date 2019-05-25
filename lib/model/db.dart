@@ -84,23 +84,11 @@ class TodoProvider {
     return list;
   }
 
-  // Future<List<Todo>> getAllTodoNotDones() async {
-  //   final _database = await database;
-  //   var result = await _database.query(tableTodo, where: '$columnDone = 0');
-  //   List<Todo> list = result.map((d) => Todo.fromMap(d)).toList();
-  //   return list;
-  // }
-
   Future<User> insert(User user) async {
     final _database = await database;
     user.id = await _database.insert(tableUser, user.toMap());
     return user;
   }
-
-  // Future<int> deleteDones() async {
-  //   final _database = await database;
-  //   return _database.delete(tableTodo, where: '$columnDone = 1');
-  // }
 
   Future<int> update(User user) async {
     final _database = await database;

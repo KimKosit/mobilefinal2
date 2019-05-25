@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobilefinal2/model/friends.dart';
 import 'package:mobilefinal2/model/db.dart';
-import 'friendsinfo.dart';
-import 'home.dart';
+import 'package:mobilefinal2/ui/todo.dart';
 
 class Friend extends StatefulWidget {
   final User user;
@@ -18,7 +17,6 @@ class FriendState extends State<Friend> {
   FriendProvider friendPv = FriendProvider();
   @override
   Widget build(BuildContext context) {
-    User user = widget.user;
     // TODO: implement build
     return Scaffold(
       body: Padding(
@@ -28,21 +26,19 @@ class FriendState extends State<Friend> {
             RaisedButton(
               child: Text('BACK'),
               onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(user: user)));
+                Navigator.pop(context);
               },
             ),
+            
             FutureBuilder(
               future: friendPv
-                  .loadDatas("https://plumbr.io/app/uploads/2015/01/thread-lock.jpeg"),
+                  .loadDatas("https://jsonplaceholder.typicode.com/users"),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
-                  return frinedList(context, snapshot);
+                  return friendList(context, snapshot);
                 } else {
                   return Center(
-                    child: Text("..."),
+                    child: Text("You've got no friends!"),
                   );
                 }
               },
@@ -53,7 +49,7 @@ class FriendState extends State<Friend> {
     );
   }
 
-  Widget frinedList(BuildContext context, AsyncSnapshot snapshot) {
+  Widget friendList(BuildContext context, AsyncSnapshot snapshot) {
     List<MyFriend> friendList = snapshot.data;
     User myUser = widget.user;
     return Expanded(
@@ -67,28 +63,16 @@ class FriendState extends State<Friend> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("${friendList[index].id} : ${friendList[index].name}"),
-                    SizedBox(
-                      height: 20,
-                    ),
                     Text("${friendList[index].email}"),
-                    SizedBox(
-                      height: 10,
-                    ),
                     Text("${friendList[index].phone}"),
-                    SizedBox(
-                      height: 10,
-                    ),
                     Text("${friendList[index].website}"),
-                    SizedBox(
-                      height: 10,
-                    ),
                   ],
                 ),
                 onTap: () {
-                  Navigator.pushReplacement(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => FriendInfo(
+                          builder: (context) => TodoPage(
                                 id: friendList[index].id,
                                 name: friendList[index].name,
                                 user: myUser,

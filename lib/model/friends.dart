@@ -44,3 +44,4 @@ class FriendProvider {
     return friendList.friends;
   }
 }
+

@@ -105,7 +105,7 @@ class LoginPageState extends State<LoginPage> {
                         sharePref.setString("username", allUser[i].userId);
                         sharePref.setString("password", allUser[i].password);
                         check = 1;
-                        Navigator.pushReplacement(
+                        Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>

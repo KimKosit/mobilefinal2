@@ -15,39 +15,33 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  SharedPreferences sprefer;
+  SharedPreferences sharePref;
   @override
   Widget build(BuildContext context) {
     User user = widget.user;
     return Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
           title: Text('Home'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView(
             children: <Widget>[
-              ListTile(
-                title: Text('HELLO ${user.name}',
-                    style: new TextStyle(fontSize: 20)),
-                subtitle: Text('this is my quote  "${user.quote}"'),
-              ),
-              Column(
-                children: <Widget>[
+              Container(child: ListTile(
+                title: Center(child: Text('HELLO ${user.name}'),),
+                subtitle: Center(child:Text('this is my quote  "${user.quote}"')),
+              ),),
                   RaisedButton(
                     child: Text('PROFILE SETUP'),
                     onPressed: () {
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Profile(user: user)));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => Profile(user: user)));
                     },
                   ),
                   RaisedButton(
                     child: Text('My FRIENDS'),
                     onPressed: () {
-                      Navigator.pushReplacement(
+                      Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => Friend(user: user)));
@@ -57,14 +51,12 @@ class HomePageState extends State<HomePage> {
                     child: Text('SIGN OUT'),
                     onPressed: () async {
                       Navigator.pushNamed(context, '/');
-                      sprefer = await SharedPreferences.getInstance();
-                      sprefer.setString("username", null);
-                      sprefer.setString("password", null);
+                      sharePref = await SharedPreferences.getInstance();
+                      sharePref.setString("username", null);
+                      sharePref.setString("password", null);
                       Navigator.pushReplacementNamed(context, '/');
                     },
                   )
-                ],
-              )
             ],
           ),
         ));

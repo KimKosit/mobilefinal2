@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobilefinal2/model/todo.dart';
 import 'package:mobilefinal2/model/db.dart';
-import 'friendsinfo.dart';
 
 class TodoPage extends StatefulWidget {
   final int id;
@@ -16,7 +15,7 @@ class TodoPage extends StatefulWidget {
 }
 
 class TodoPageState extends State<TodoPage> {
-  MyTodoProvider todoPv = MyTodoProvider();
+  MyTodoProvider db = MyTodoProvider();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -31,25 +30,18 @@ class TodoPageState extends State<TodoPage> {
             RaisedButton(
               child: Text('BACK'),
               onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => FriendInfo(
-                              id: id,
-                              name: name,
-                              user: user,
-                            )));
+                Navigator.pop(context);
               },
             ),
             FutureBuilder(
-              future: todoPv.loadDatas(
-                  "https://jsonplaceholder.typicode.com/users/$id/todos", id),
+              future: db.loadDatas(
+                  "https://jsonplaceholder.typicode.com/todos?userId=$id", id),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return todoList(context, snapshot);
                 } else {
                   return Center(
-                    child: Text("..."),
+                    child: Text("No todo found!"),
                   );
                 }
               },
@@ -68,34 +60,15 @@ class TodoPageState extends State<TodoPage> {
         itemBuilder: (BuildContext context, int index) {
           return Card(
             child: Container(
-              child: InkWell(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text("${todoList[index].id}",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        )),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Text("${todoList[index].title}",
-                        style: TextStyle(fontSize: 25)),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    Text("${todoList[index].id}"),
+                    Text("${todoList[index].title}"),
                     Text(
-                        "${todoList[index].completed}" == "true"
-                            ? "Completed"
-                            : "",
-                        style: TextStyle(fontSize: 20)),
-                    SizedBox(
-                      height: 10,
-                    ),
+                        "${todoList[index].completed}" == "true" ? "Completed" : ""),
                   ],
                 ),
-              ),
             ),
           );
         },
