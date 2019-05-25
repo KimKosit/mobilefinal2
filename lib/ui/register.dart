@@ -29,7 +29,6 @@ class RegisterPageState extends State<RegisterPage> {
     user.getAllUser().then((myList) {
       setState(() {
         allUser = myList;
-        print(allUser.length);
       });
     });
   }

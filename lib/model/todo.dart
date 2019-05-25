@@ -36,22 +36,15 @@ class TodoList {
 
 class MyTodoProvider {
   Future<List<Todo>> loadDatas(String url, int id) async {
-    print(url);
-    print('id $id');
     List<Todo> filter = List<Todo>();
     http.Response response = await http.get(url);
     final data = json.decode(response.body);
-    print('data $data');
     TodoList todoList = TodoList.fromJson(data);
-    print('len: ${todoList.todos.length}');
     for (int i = 0; i < todoList.todos.length; i++) {
-      print("111");
       if (todoList.todos[i].userId == id) {
-        print('in');
         filter.add(todoList.todos[i]);
       }
     }
-    print(filter);
     return filter;
   }
 }

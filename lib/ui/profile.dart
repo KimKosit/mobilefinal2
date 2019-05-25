@@ -34,7 +34,6 @@ class ProfileState extends State<Profile> {
     user.getAllUser().then((myList) {
       setState(() {
         allUser = myList;
-        print(allUser.length);
       });
     });
   }
@@ -64,7 +63,7 @@ class ProfileState extends State<Profile> {
                     else if (value.length < 6 || value.length > 12)
                       return "User Id must be 6-12 characters long";
                     for (int i = 0; i < allUser.length; i++) {
-                      if (allUser[i].userId == value) return "This id already taken";
+                      if (allUser[i].userId == value && thisUser.userId != value) return "This id already taken";
                     }
                   },
                 ),
@@ -133,10 +132,7 @@ class ProfileState extends State<Profile> {
                   thisUser.password = password.text;
                   thisUser.quote = quote.text;
                   user.update(thisUser).then((value) {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomePage(user: thisUser)));
+                    Navigator.pop(context);
                   });
                 }
               },

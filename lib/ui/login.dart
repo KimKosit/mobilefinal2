@@ -61,11 +61,10 @@ class LoginPageState extends State<LoginPage> {
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
             children: <Widget>[
               Image.network(
-                "https://plumbr.io/app/uploads/2015/01/thread-lock.jpeg",
-                height: 250,
+                "https://plumbr.io/app/uploads/2015/01/thread-lock.jpeg", height: 200,
               ),
               Container(
-                margin: const EdgeInsets.only(top: 30),
+                margin: EdgeInsets.only(top: 30),
                 child: TextFormField(
                   controller: username,
                   decoration: InputDecoration(
@@ -79,7 +78,7 @@ class LoginPageState extends State<LoginPage> {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 20),
+                margin:  EdgeInsets.only(top: 20),
                 child: TextFormField(
                   controller: password,
                   obscureText: true,
@@ -96,7 +95,6 @@ class LoginPageState extends State<LoginPage> {
               RaisedButton(
                 child: Text("LOGIN"),
                 onPressed: () async {
-                  int check = 0;
                   if (_formKey.currentState.validate()) {
                     for (int i = 0; i < allUser.length; i++) {
                       if (allUser[i].userId == username.text &&
@@ -104,8 +102,7 @@ class LoginPageState extends State<LoginPage> {
                         sharePref = await SharedPreferences.getInstance();
                         sharePref.setString("username", allUser[i].userId);
                         sharePref.setString("password", allUser[i].password);
-                        check = 1;
-                        Navigator.push(
+                        Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
@@ -113,15 +110,14 @@ class LoginPageState extends State<LoginPage> {
                       }
                     }
                     if (username.text.length > 0 &&
-                        password.text.length > 0 &&
-                        check == 0) {
+                        password.text.length > 0) {
                       return showDialog<void>(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: Text("Alert"),
                             content:
-                                const Text("username or password ไม่ถูกต้อง"),
+                                 Text("Incorrect User Id or Password"),
                             actions: <Widget>[
                               FlatButton(
                                 child: Text("OK"),
@@ -137,15 +133,17 @@ class LoginPageState extends State<LoginPage> {
                   }
                 },
               ),
-              FlatButton(
-                child: SizedBox(
-                    width: double.infinity,
-                    child: Text("Register New Account",
-                        textAlign: TextAlign.right,
-                        style: TextStyle(color: Colors.blue))),
-                onPressed: () {
-                  Navigator.pushNamed(context, "/register_page");
-                },
+              Container(
+                alignment: Alignment.centerRight,
+                child: FlatButton(
+                  child: Text(
+                    "Register New Account",
+                    style: TextStyle(color: Colors.teal),
+                  ),
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/register");
+                  },
+                ),
               ),
             ],
           ),

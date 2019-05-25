@@ -22,16 +22,16 @@ class MyFriend {
 }
 
 class FriendList {
-  final List<MyFriend> friends;
+  final List<MyFriend> friend;
   FriendList({
-    this.friends,
+    this.friend,
   });
   factory FriendList.fromJson(List<dynamic> parsedJson) {
-    List<MyFriend> friends = new List<MyFriend>();
-    friends = parsedJson.map((i) => MyFriend.fromJson(i)).toList();
+    List<MyFriend> friend = new List<MyFriend>();
+    friend = parsedJson.map((i) => MyFriend.fromJson(i)).toList();
 
     return new FriendList(
-      friends: friends,
+      friend: friend,
     );
   }
 }
@@ -41,7 +41,7 @@ class FriendProvider {
     http.Response response = await http.get(url);
     final data = json.decode(response.body);
     FriendList friendList = FriendList.fromJson(data);
-    return friendList.friends;
+    return friendList.friend;
   }
 }
 

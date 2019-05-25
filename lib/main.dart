@@ -12,10 +12,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // appBarTheme: AppBarTheme(color: Color(0xfffdd835)), //only appbar
-        primarySwatch: Colors.blue,
-      ),
       initialRoute: '/',
       routes: {
         "/": (context) => LoginPage(),

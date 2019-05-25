@@ -28,7 +28,7 @@ class HomePageState extends State<HomePage> {
           child: ListView(
             children: <Widget>[
               Container(child: ListTile(
-                title: Center(child: Text('HELLO ${user.name}'),),
+                title: Center(child: Text('Hello ${user.name}'),),
                 subtitle: Center(child:Text('this is my quote  "${user.quote}"')),
               ),),
                   RaisedButton(

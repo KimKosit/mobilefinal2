@@ -20,8 +20,6 @@ class TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     int id = widget.id;
-    String name = widget.name;
-    User user = widget.user;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 30),

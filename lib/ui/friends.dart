@@ -14,7 +14,7 @@ class Friend extends StatefulWidget {
 }
 
 class FriendState extends State<Friend> {
-  FriendProvider friendPv = FriendProvider();
+  FriendProvider friend = FriendProvider();
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -31,7 +31,7 @@ class FriendState extends State<Friend> {
             ),
             
             FutureBuilder(
-              future: friendPv
+              future: friend
                   .loadDatas("https://jsonplaceholder.typicode.com/users"),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
